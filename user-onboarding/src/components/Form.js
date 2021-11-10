@@ -43,6 +43,7 @@ const Form = (props) => {
                         onChange={onChange}
                     />
                 </label>
+                <br/>
                 <label>Terms of Service&nbsp;
                     <input
                         type="checkbox"

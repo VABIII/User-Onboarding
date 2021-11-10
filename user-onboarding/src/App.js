@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as yup from "yup";
 import Form from "./components/Form";
-import Header from "./components/Header";
 import Home from "./components/Home";
 import './App.css';
-import Users from "./components/Users"
+import Users from "./components/Users";
+import schema from "./validation/formSchema";
+
 
 
 const initialFormValues = {
@@ -30,7 +31,7 @@ const initialDisabled = true;
 function App() {
     const [users, setUsers] = useState(initialUsers);
     const [formValues, setFormValues] = useState(initialFormValues);
-    const [errors, setErrors] = useState((initialFormErrors));
+    const [formErrors, setFormErrors] = useState((initialFormErrors));
     const [disabled, setDisabled] = useState(initialDisabled);
 
     useEffect(() => {
@@ -63,6 +64,15 @@ function App() {
             })
     }
 
+    const validate = (name, value) => {
+        yup.reach(schema, name)
+            .validate(value)
+            .then(() => {
+                setFormErrors({...formErrors, [name]: ""})
+            })
+            .catch(err => setFormErrors({...formErrors, [name]: err.errors[0]}))
+    }
+
     const inputChange = (name, value) => {
         setFormValues({
             ...formValues,
@@ -83,7 +93,6 @@ function App() {
   return (
 
     <div className="App">
-        <Header/>
         <header className="App-header">
             <div className="add-user-form">
                 <Form

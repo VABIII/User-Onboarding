@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 
-export const formSchema = yup.object().shape({
+const formSchema = yup.object().shape({
     first_name: yup
         .string()
         .trim()
@@ -20,7 +20,7 @@ export const formSchema = yup.object().shape({
         .boolean()
 })
 
-
+export default formSchema;
 
 
 

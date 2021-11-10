@@ -1,0 +1,63 @@
+.header-links {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 2%;
+    font-weight: bolder;
+}
+
+.header-links Link {
+    text-decoration: none;
+}
+
+#form {
+    text-decoration: none;
+    color: lightgray;
+}
+
+#home {
+    text-decoration: none;
+    color: lightgray;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

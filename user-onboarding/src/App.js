@@ -3,6 +3,8 @@ import axios from "axios";
 import * as yup from "yup";
 import Form from "./components/Form";
 import './App.css';
+import Header from "./components/Header";
+import Home from "./components/Home";
 
 const initialFormValues = {
     firstName: "",
@@ -29,12 +31,26 @@ function App() {
     const [errors, setErrors] = useState((initialFormErrors));
     const [disabled, setDisabled] = useState(initialDisabled);
 
+    const postUsers = (newUser) => {
+        axios.post(`https://reqres.in/api/users`, newUser)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.error(err);
+            })
+
+
+    }
+
+
 
   return (
     <div className="App">
-      <header className="App-header">
-
-      </header>
+        <Header/>
+        <header className="App-header">
+            <Home/>
+        </header>
     </div>
   );
 }

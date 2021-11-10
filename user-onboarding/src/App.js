@@ -61,6 +61,12 @@ function App() {
             })
     }
 
+    const inputChange = (name, value) => {
+        setFormValues({
+            ...formValues,
+            [name]:value
+        })
+    }
 
 
   return (
@@ -69,7 +75,10 @@ function App() {
         <Header/>
         <header className="App-header">
             <div className="add-user-form">
-                <Form values={formValues}/>
+                <Form
+                    values={formValues}
+                    change={inputChange}
+                />
             </div>
             <div className="home">
                 <Home/>

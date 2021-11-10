@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as yup from "yup";
 import Form from "./components/Form";
-import './App.css';
 import Header from "./components/Header";
 import Home from "./components/Home";
+import './App.css';
+import Users from "./components/Users"
+
 
 const initialFormValues = {
     firstName: "",
@@ -31,6 +33,22 @@ function App() {
     const [errors, setErrors] = useState((initialFormErrors));
     const [disabled, setDisabled] = useState(initialDisabled);
 
+    useEffect(() => {
+        getUsers();
+    }, [])
+
+    const getUsers =() =>{
+        axios.get(`https://reqres.in/api/users`)
+            .then(res => {
+                const users = res.data.data;
+                // console.log(res.data.data);
+                setUsers(users)
+            })
+            .catch(err => {
+                console.error(err)
+            })
+    }
+
     const postUsers = (newUser) => {
         axios.post(`https://reqres.in/api/users`, newUser)
             .then(res => {
@@ -39,19 +57,27 @@ function App() {
             .catch(err => {
                 console.error(err);
             })
-
-
     }
 
 
 
   return (
+
     <div className="App">
         <Header/>
         <header className="App-header">
-            <Home/>
+            <div className="add-user-form">
+                <Form/>
+            </div>
+            <div className="home">
+                <Home/>
+            </div>
+            <div className="users">
+                <Users users={users}/>
+            </div>
         </header>
     </div>
+
   );
 }
 

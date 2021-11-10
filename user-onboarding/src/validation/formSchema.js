@@ -2,12 +2,12 @@ import * as yup from "yup";
 
 
 export const formSchema = yup.object().shape({
-    firstName: yup
+    first_name: yup
         .string()
         .trim()
         .required("First Name is required.")
         .min(3, "First name should be at least 3 characters long."),
-    lastName: yup
+    last_name: yup
         .string()
         .trim()
         .required("Last name is required")

@@ -1,32 +1,37 @@
 import React from "react";
-import * as yup from "yup";
 
 
 const Form = (props) => {
-    const {values, change} = props;
+    const {values, change, submit} = props;
 
     const onChange = evt => {
+        console.log(evt.target)
         const {name, value, checked, type} = evt.target;
         const realValue = type === "checkbox" ? checked : value;
         change(name, realValue);
     }
 
+    const onSubmit = evt => {
+        evt.preventDefault();
+        submit();
+    }
+
     return (
         <div>
-            <form>
+            <form className="form" onSubmit={onSubmit}>
                 <label>First Name:&nbsp;
                     <input
                         type="text"
-                        name="firstname"
-                        value={values.firstName}
+                        name="first_name"
+                        value={values.first_name}
                         onChange={onChange}
                     />
                 </label>
                 <label>&nbsp;Last Name:&nbsp;
                     <input
                         type="text"
-                        name="lastName"
-                        value={values.lastName}
+                        name="last_name"
+                        value={values.last_name}
                         onChange={onChange}
                     />
                 </label>

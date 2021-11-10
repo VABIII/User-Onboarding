@@ -7,11 +7,11 @@ export default function User(props) {
     return(
         <div>
             <h1>
-                {user.first_name}
+                {user.first_name}&nbsp;
                 {user.last_name}
             </h1>
             <p>{user.email}</p>
-            <img src={user.avatar} alt="user profile picture"/>
+            {user.avatar && <img src={user.avatar} alt="user profile pic"/>}
         </div>
     )
 

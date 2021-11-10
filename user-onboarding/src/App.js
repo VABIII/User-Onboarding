@@ -9,16 +9,16 @@ import Users from "./components/Users"
 
 
 const initialFormValues = {
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
     termsOfService: false
 };
 
 const initialFormErrors = {
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     email: "",
     password: ""
 };
@@ -40,6 +40,7 @@ function App() {
     const getUsers =() =>{
         axios.get(`https://reqres.in/api/users`)
             .then(res => {
+                console.log(res.data.data);
                 const users = res.data.data;
                 setUsers(users)
             })
@@ -52,6 +53,7 @@ function App() {
         axios.post(`https://reqres.in/api/users`, newUser)
             .then(res => {
                 console.log(res.data);
+                setUsers([newUser, ...users])
             })
             .catch(err => {
                 console.error(err);
@@ -68,6 +70,15 @@ function App() {
         })
     }
 
+    const formSubmit = () => {
+        const newUser ={
+            first_name: formValues.first_name.trim(),
+            last_name: formValues.last_name.trim(),
+            password: formValues.password.trim(),
+            termsOfService: formValues.termsOfService
+        }
+        postUsers(newUser);
+    }
 
   return (
 
@@ -78,6 +89,7 @@ function App() {
                 <Form
                     values={formValues}
                     change={inputChange}
+                    submit={formSubmit}
                 />
             </div>
             <div className="home">
@@ -93,3 +105,6 @@ function App() {
 }
 
 export default App;
+
+
+// https://sflix.to/movie/free-shang-chi-and-the-legend-of-the-ten-rings-hd-66668

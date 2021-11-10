@@ -7,8 +7,8 @@ export default function Users(props) {
     return(
         <div>
             {
-                users.map((user, i) => {
-                   return <User user={user}/>
+                users.map(user => {
+                   return <User key={user.id} user={user}/>
                 })
             }
         </div>

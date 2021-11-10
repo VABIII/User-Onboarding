@@ -41,7 +41,6 @@ function App() {
         axios.get(`https://reqres.in/api/users`)
             .then(res => {
                 const users = res.data.data;
-                // console.log(res.data.data);
                 setUsers(users)
             })
             .catch(err => {
@@ -52,10 +51,13 @@ function App() {
     const postUsers = (newUser) => {
         axios.post(`https://reqres.in/api/users`, newUser)
             .then(res => {
-                console.log(res);
+                console.log(res.data);
             })
             .catch(err => {
                 console.error(err);
+            })
+            .finally(() => {
+                setFormValues(initialFormValues);
             })
     }
 
@@ -67,7 +69,7 @@ function App() {
         <Header/>
         <header className="App-header">
             <div className="add-user-form">
-                <Form/>
+                <Form values={formValues}/>
             </div>
             <div className="home">
                 <Home/>

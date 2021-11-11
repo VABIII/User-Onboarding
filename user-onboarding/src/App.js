@@ -20,8 +20,8 @@ const initialFormValues = {
 const initialFormErrors = {
     first_name: "",
     last_name: "",
-    email: "",
-    password: ""
+    password: "",
+    termsOfService: ""
 };
 
 const initialUsers = [];
@@ -31,17 +31,12 @@ const initialDisabled = true;
 function App() {
     const [users, setUsers] = useState(initialUsers);
     const [formValues, setFormValues] = useState(initialFormValues);
-    const [formErrors, setFormErrors] = useState((initialFormErrors));
+    const [formErrors, setFormErrors] = useState(initialFormErrors);
     const [disabled, setDisabled] = useState(initialDisabled);
-
-    useEffect(() => {
-        getUsers();
-    }, [])
 
     const getUsers =() =>{
         axios.get(`https://reqres.in/api/users`)
             .then(res => {
-                console.log(res.data.data);
                 const users = res.data.data;
                 setUsers(users)
             })
@@ -74,6 +69,7 @@ function App() {
     }
 
     const inputChange = (name, value) => {
+        validate(name, value);
         setFormValues({
             ...formValues,
             [name]:value
@@ -90,6 +86,14 @@ function App() {
         postUsers(newUser);
     }
 
+    useEffect(() => {
+        getUsers();
+    }, [])
+
+    useEffect(() => {
+        schema.isValid(formValues).then(valid => setDisabled(!valid))
+    },[formValues])
+
   return (
 
     <div className="App">
@@ -99,12 +103,14 @@ function App() {
                     values={formValues}
                     change={inputChange}
                     submit={formSubmit}
+                    disabled={disabled}
+                    formErrors={formErrors}
                 />
             </div>
             <div className="home">
                 <Home/>
             </div>
-            <div className="users">
+            <div className="users-container">
                 <Users users={users}/>
             </div>
         </header>

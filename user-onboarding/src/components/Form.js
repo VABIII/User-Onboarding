@@ -2,10 +2,9 @@ import React from "react";
 
 
 const Form = (props) => {
-    const {values, change, submit} = props;
+    const {values, change, submit, disabled, formErrors} = props;
 
     const onChange = evt => {
-        console.log(evt.target)
         const {name, value, checked, type} = evt.target;
         const realValue = type === "checkbox" ? checked : value;
         change(name, realValue);
@@ -53,7 +52,13 @@ const Form = (props) => {
                     />
                 </label>
                 <div className="submit-button">
-                    <button>Submit</button>
+                    <button disabled={disabled}>Submit</button>
+                </div>
+                <div className="errors">
+                    <div>{formErrors.first_name}</div>
+                    <div>{formErrors.last_name}</div>
+                    <div>{formErrors.password}</div>
+                    <div>{formErrors.termsOfService}</div>
                 </div>
             </form>
         </div>

@@ -20,6 +20,7 @@ const initialFormValues = {
 const initialFormErrors = {
     first_name: "",
     last_name: "",
+    email: "",
     password: "",
     termsOfService: ""
 };
@@ -38,17 +39,16 @@ function App() {
         axios.get(`https://reqres.in/api/users`)
             .then(res => {
                 const users = res.data.data;
-                setUsers(users)
+                setUsers(users);
             })
             .catch(err => {
-                console.error(err)
+                console.error(err);
             })
     }
 
     const postUsers = (newUser) => {
         axios.post(`https://reqres.in/api/users`, newUser)
             .then(res => {
-                console.log(res.data);
                 setUsers([newUser, ...users])
             })
             .catch(err => {
@@ -80,6 +80,7 @@ function App() {
         const newUser ={
             first_name: formValues.first_name.trim(),
             last_name: formValues.last_name.trim(),
+            email: formValues.email.trim(),
             password: formValues.password.trim(),
             termsOfService: formValues.termsOfService
         }
@@ -122,4 +123,4 @@ function App() {
 export default App;
 
 
-// https://sflix.to/movie/free-shang-chi-and-the-legend-of-the-ten-rings-hd-66668
+

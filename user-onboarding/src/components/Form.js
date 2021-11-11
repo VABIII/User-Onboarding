@@ -34,6 +34,14 @@ const Form = (props) => {
                         onChange={onChange}
                     />
                 </label>
+                <label>&nbsp;Email:&nbsp;
+                    <input
+                        type="email"
+                        name="email"
+                        value={values.email}
+                        onChange={onChange}
+                    />
+                </label>
                 <label>&nbsp;Password:&nbsp;
                     <input
                         type="password"
@@ -52,7 +60,7 @@ const Form = (props) => {
                     />
                 </label>
                 <div className="submit-button">
-                    <button disabled={disabled}>Submit</button>
+                    <button name="submit" disabled={disabled}>Submit</button>
                 </div>
                 <div className="errors">
                     <div>{formErrors.first_name}</div>

@@ -80,7 +80,7 @@ function App() {
         const newUser ={
             first_name: formValues.first_name.trim(),
             last_name: formValues.last_name.trim(),
-            email: formValues.email.trim(),
+            email: formValues.email,
             password: formValues.password.trim(),
             termsOfService: formValues.termsOfService
         }

@@ -1,3 +1,5 @@
+import {should} from "cypress";
+
 describe("user-onboarding", () => {
     beforeEach(() => {
         cy.visit(`http://localhost:3000/`);
@@ -52,8 +54,37 @@ describe("user-onboarding", () => {
         })
     })
 
-    describe("Form Validation")
-
+    describe("Form Validation Errors", () => {
+        it("Typing less than the min character count and checking for FV errors", () => {
+            first_nameInput()
+                .should("have.value", "")
+                .type("vern")
+                .clear()
+                .type("ve");
+            cy.contains("First name should be at least 3 characters long.");
+            first_nameInput()
+                .clear();
+            cy.contains("First Name is required");
+            last_nameInput()
+                .should("have.value", "")
+                .type("vern")
+                .clear()
+                .type("ve")
+            cy.contains("Last Name should be at least 3 characters long.");
+            last_nameInput()
+                .clear()
+            cy.contains("Last Name is required.");
+            passwordInput()
+                .should("have.value", "")
+                .type("vern")
+            cy.contains("Password must be at least 8 characters long")
+            passwordInput()
+                .should("have.value", "")
+                .type("vern")
+                .clear()
+            cy.contains("Password is required.")
+        })
+    })
 })
 
 
